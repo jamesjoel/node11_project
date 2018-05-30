@@ -10,7 +10,7 @@ router.get('/', function(req, res){
 	{
 		check=false;
 	}
-	var pagedata = {title : "Home Page", pagename : "home/index", check : check};
+	var pagedata = {title : "About Page", pagename : "about/index", check : check};
 	res.render("layout", pagedata);
 });
 module.exports=router;

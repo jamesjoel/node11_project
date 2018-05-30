@@ -6,7 +6,7 @@ var url = "mongodb://localhost:27017";
 
 router.get('/', function(req, res){
 
-	var pagedata = {title : "Login Page", pagename : "login/index"};
+	var pagedata = {title : "Login Page", pagename : "login/index", message : req.flash('msg')};
 	res.render("layout", pagedata);
 });
 
@@ -17,8 +17,9 @@ router.post("/", function(req, res){
 		var db = client.db('project');
 		db.collection('user').find({ username : u}).toArray(function(err, result){
 			// console.log(result.length);
-			if(result.length==0)
+			if(result.length==0) // rusername incorrect
 			{
+				req.flash("msg", "This Username and Password Incorrect");
 				res.redirect("/login");
 			}
 			else
@@ -33,6 +34,7 @@ router.post("/", function(req, res){
 				}
 				else
 				{
+					req.flash("msg", "Password is Incorrect");
 					res.redirect('/login');
 				}
 			}
