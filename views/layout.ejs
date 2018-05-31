@@ -38,6 +38,8 @@
 </head>
 <body class="animsition">
 	
+
+	
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -50,10 +52,13 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							Help & FAQs
-						</a>
-						<% if(check){ %>
+						<b class="flex-c-m trans-04 p-lr-25" style="color:#FFF !important;">
+							<% if(session.full_name) { %> 
+								<%= session.full_name %>
+
+							<% } %>
+						</b>
+						<% if(session.is_user_logged_in){ %>
 
 						<a href="/profile" class="flex-c-m trans-04 p-lr-25">
 							Profile
