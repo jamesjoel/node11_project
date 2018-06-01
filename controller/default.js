@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 // var chache = require('chache');
+router.use("/demo", require("./demo"));
+
+
+
 router.use("/", require("./home"));
 router.use("/login", require("./login"));
 router.use("/signup", require("./signup"));
