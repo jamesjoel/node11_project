@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var user = require("../model/user");
 
-var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017";
-var config = require("../config/db");
 
 router.get('/', function(req, res){
 
@@ -14,33 +12,28 @@ router.get('/', function(req, res){
 router.post("/", function(req, res){
 	var u = req.body.username;
 	var p = req.body.password;
-	MongoClient.connect(url, function(err, client){
-		var db = client.db(config.dbName);
-		db.collection('user').find({ username : u}).toArray(function(err, result){
-			// console.log(result.length);
-			if(result.length==0) // rusername incorrect
+	user.findWhere({username : u}, function(err, result){
+		if(result.length==0) // rusername incorrect
+		{
+			req.flash("msg", "This Username and Password Incorrect");
+			res.redirect("/login");
+		}
+		else
+		{
+			var data = result[0];
+			if(data.password == p)
 			{
-				req.flash("msg", "This Username and Password Incorrect");
-				res.redirect("/login");
+				req.session.userid = data._id;
+				req.session.full_name = data.full_name;
+				req.session.is_user_logged_in=true;
+				res.redirect('/');
 			}
 			else
 			{
-				var data = result[0];
-				if(data.password == p)
-				{
-					req.session.userid = data._id;
-					req.session.full_name = data.full_name;
-					req.session.is_user_logged_in=true;
-					res.redirect('/');
-				}
-				else
-				{
-					req.flash("msg", "Password is Incorrect");
-					res.redirect('/login');
-				}
+				req.flash("msg", "Password is Incorrect");
+				res.redirect('/login');
 			}
-
-		});
+		}
 	});
 	
 

@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 // var chache = require('chache');
-router.use("/demo", require("./demo"));
 
 
 
@@ -17,6 +16,8 @@ router.use("/logout", require("./logout"));
 /* This is admin panel coading ------------*/
 router.use('/admin', require('./adminlogin'))
 router.use("/admin/dashboard", backdoor_admin, require("./admindash"))
+router.use("/admin/add_category", backdoor_admin, require("./adminaddcategory"))
+router.use("/admin/view_category", backdoor_admin, require("./adminviewcategory"))
 
 
 // router.use("/user", chache, require("./"))
