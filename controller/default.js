@@ -18,6 +18,8 @@ router.use('/admin', require('./adminlogin'))
 router.use("/admin/dashboard", backdoor_admin, require("./admindash"))
 router.use("/admin/add_category", backdoor_admin, require("./adminaddcategory"))
 router.use("/admin/view_category", backdoor_admin, require("./adminviewcategory"))
+router.use("/admin/add_product", backdoor_admin, require("./adminaddproduct"))
+router.use("/admin/view_product", backdoor_admin, require("./adminviewproduct"))
 
 
 // router.use("/user", chache, require("./"))
