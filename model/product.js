@@ -13,3 +13,10 @@ module.exports.find=function(cb){
 		db.collection('product').find().toArray(cb);
 	});
 }
+module.exports.remove=function(obj, cb){
+	connection.init(function(err, client){
+		var db = client.db(config.dbName);
+		db.collection('product').remove(obj, cb);
+	});
+
+}
