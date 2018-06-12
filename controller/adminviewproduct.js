@@ -15,13 +15,15 @@ router.get("/", function(req, res){
 	
 });
 
-router.get("/delete", function(req, res){
-	console.log(req.query);
-	//res.send("delete");
-	product.remove({ _id : Mongodb.ObjectId(req.query.id) }, function(err, result){
+router.get("/delete/:id", function(req, res){
+	// console.log(req.query);
+	console.log(req.params);
+	// res.send("delete");
+	product.remove({ _id : Mongodb.ObjectId(req.params.id) }, function(err, result){
 		console.log(result);
 		res.redirect('/admin/view_product');
 	});
+
 });
 
 // ObjectId()
