@@ -7,6 +7,7 @@
       <th>Product Name</th>
       <th>Product Price</th>
       <th>Product Discount</th>
+      <th>Product Category</th>
   		<th>Product Image</th>
   		<th>Edit</th>
   		<th>Delete</th>
@@ -17,8 +18,9 @@
         <td><%= x.name %></td>
         <td><%= x.price %></td>
         <td><%= x.discount %></td>
+        <td><%= x.category %></td>
   			<td><img src = "/product_image/<%= x.image %>" height="70" width="70"></td>
-  			<td><a href="#" class="btn btn-sm btn-info">Edit</a></td>
+  			<td><a href="view_product/update/<%= x._id %>" class="btn btn-sm btn-info">Edit</a></td>
   			
 
         <td><a href="view_product/delete/<%= x._id %>" data-toggle="modal" class="btn btn-sm btn-danger">Delete</a></td>

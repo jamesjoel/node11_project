@@ -18,12 +18,13 @@
       <input type="text" placeholder="Product Price" name="price" class="form-control">
 
     </div>
+    
     <div class="form-group">
       <label>Product Category</label>
       <select class="form-control" name="category">
         <option>Select</option>
         <% catedata.forEach(function(x){ %>
-          <option><%= x.name %></option>
+          <option value="<%= x._id %>"><%= x.name %></option>
      <% }) %>
       </select>
 
