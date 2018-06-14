@@ -5,6 +5,7 @@ var router = express.Router();
 
 
 router.use("/", require("./home"));
+router.use("/category", require("./category"));
 router.use("/login", require("./login"));
 router.use("/signup", require("./signup"));
 router.use("/about", require("./about"));
@@ -14,7 +15,7 @@ router.use('/profile', backdoor, require('./profile'));
 router.use("/logout", require("./logout"));
 
 /* This is admin panel coading ------------*/
-router.use('/admin', require('./adminlogin'))
+router.use('/cpanel', adminProtactor, require('./adminlogin'))
 router.use("/admin/dashboard", backdoor_admin, require("./admindash"))
 router.use("/admin/add_category", backdoor_admin, require("./adminaddcategory"))
 router.use("/admin/view_category", backdoor_admin, require("./adminviewcategory"))
@@ -40,6 +41,13 @@ function backdoor_admin(req, res, next)
 	}
 	next();
 }
-
+function adminProtactor(req, res, next)
+{
+	if(req.session.is_admin_logged_in)
+	{
+		res.redirect("/admin/dashboard");
+	}
+	next();
+}
 
 module.exports=router;

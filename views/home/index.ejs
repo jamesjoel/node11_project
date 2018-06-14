@@ -13,9 +13,9 @@
 						All Products
 					</button>
 					<% catedata.forEach(function(x){ %>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<a href="/category/<%= x.name %>/<%= x._id %>" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
 						<%= x.name %>
-					</button>
+					</a>
 				<% }) %>
 					
 

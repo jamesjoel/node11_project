@@ -44,7 +44,7 @@ router.post("/update", function(req, res){
 	delete req.body.id;
 	delete req.body.image;
 	// console.log(req.files);
-	if(req.files)
+	if(req.files.image)//{}
 	{
 		var file = req.files.image;
 		var newname = changename(file.name);

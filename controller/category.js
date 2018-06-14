@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var category = require("../model/category");
 var product = require("../model/product");
-router.get('/', function(req, res){
-	
-	product.find(function(err, result){
+router.get('/:name/:id', function(req, res){
+	var cid = req.params.id;
+	product.findWhere({ category : cid },function(err, result){
 		var productresult = result;
 		category.find(function(err, result){
 			var cateresult = result;
@@ -14,7 +14,4 @@ router.get('/', function(req, res){
 	});
 });
 
-// router.get("/:name/:id", function(req, res){
-// 	// console.log(req.params);
-// });
 module.exports=router;
