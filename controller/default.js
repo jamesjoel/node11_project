@@ -5,6 +5,13 @@ var router = express.Router();
 
 
 router.use("/", require("./home"));
+
+
+router.use("/cart", require("./cart"));
+
+
+
+
 router.use("/category", require("./category"));
 router.use("/login", require("./login"));
 router.use("/signup", require("./signup"));

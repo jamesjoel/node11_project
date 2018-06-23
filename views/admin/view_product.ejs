@@ -18,7 +18,12 @@
         <td><%= x.name %></td>
         <td><%= x.price %></td>
         <td><%= x.discount %></td>
-        <td><%= x.category %></td>
+        <% catdata.forEach(function(y){
+          if(y._id == x.category){ %>
+            <td><%= y.name %></td>
+        <% }
+      }) %>
+        
   			<td><img src = "/product_image/<%= x.image %>" height="70" width="70"></td>
   			<td><a href="view_product/update/<%= x._id %>" class="btn btn-sm btn-info">Edit</a></td>
   			

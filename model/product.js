@@ -1,5 +1,6 @@
 var connection = require("../config/connect");
 var config = require("../config/db");
+var mongo = require('mongodb');
 
 module.exports.insert=function(obj, cb){
 	connection.init(function(err, client){
@@ -33,4 +34,11 @@ module.exports.update=function(where, obj, cb){
 		db.collection('product').update(where, {$set : obj}, cb);
 	});
 
+}
+
+module.exports.findGetCate=function(cb){
+	connection.init(function(err, client){
+		var db = client.db(config.dbName);
+		db.collection('product').aggregate({ $lookup : { from : "category", localField : new mongo.ObjectId('$category'), foreignField : "_id", as : "catedata" }},cb);
+	});
 }

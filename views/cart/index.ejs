@@ -1,0 +1,24 @@
+<section class="bg0 p-t-104 p-b-116">
+		<div class="container">
+			<div class="flex-w flex-tr">
+				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+				<h2>Items In Your Cart</h2>
+				<table class="table table-hover table-striped table-bordered">
+					<tr>
+						<Th>S.No.</Th>
+						<th>Name</th>
+						<th>Price</th>
+					</tr>
+					<% data.forEach(function(x, i){ %>
+						<tr>
+							<Td><%= i %></Td>
+							<td><%= x.name %></td>
+							<td><%= x.price %></td>
+						</tr>
+				<% }) %>
+				</table>
+
+				
+			</div>
+		</div>
+	</section>	

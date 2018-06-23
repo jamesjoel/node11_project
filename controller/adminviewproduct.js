@@ -6,10 +6,16 @@ var category = require("../model/category");
 router.get("/", function(req, res){
 
 	product.find(function(err, result){
+		category.find(function(err, result1){
+			var pagedata = { title : "View Category", pagename : "admin/view_product", data : result, catdata : result1};
+			res.render("admin_layout", pagedata);
+		})
 		// console.log(result);
-		var pagedata = { title : "View Category", pagename : "admin/view_product", data : result};
-		res.render("admin_layout", pagedata);
+		
 	});
+	// product.findGetCate(function(err, result){
+	// 	console.log(result);
+	// })
 
 
 	
@@ -27,10 +33,10 @@ router.get("/delete/:id", function(req, res){
 });
 
 router.get("/update/:id", function(req, res){
-	// console.log(req.query);
-	// console.log(req.params);
-	// var id = req.params.id;
-	// res.send("delete");
+	console.log(req.query);
+	console.log(req.params);
+	var id = req.params.id;
+	res.send("delete");
 	product.findWhere({ _id : Mongodb.ObjectId(req.params.id) }, function(err, result){
 		var prodata=result[0];
 		// console.log(result);
@@ -40,6 +46,7 @@ router.get("/update/:id", function(req, res){
 		});
 		
 	});
+
 
 });
 
