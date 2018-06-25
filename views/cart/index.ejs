@@ -3,17 +3,22 @@
 			<div class="flex-w flex-tr">
 				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 				<h2>Items In Your Cart</h2>
+				<a href="/cart/clearcart" class="btn btn-info">Clear Cart</a>
 				<table class="table table-hover table-striped table-bordered">
 					<tr>
 						<Th>S.No.</Th>
 						<th>Name</th>
 						<th>Price</th>
+						<th>Total</th>
+						<th>Remove</th>
 					</tr>
 					<% data.forEach(function(x, i){ %>
 						<tr>
-							<Td><%= i %></Td>
+							<Td><%= i+1 %></Td>
 							<td><%= x.name %></td>
 							<td><%= x.price %></td>
+							<td><%= x.total %></td>
+							<td><a href="/cart/removeitem/<%= x._id %>" class="btn btn-danger">Remove</a></td>
 						</tr>
 				<% }) %>
 				</table>
