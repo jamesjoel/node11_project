@@ -25,39 +25,48 @@ router.get("/add/:id", function(req, res){
 });
 
 router.get("/mycart", function(req, res){
-	var carStr = req.cookies.pid; 
-	var arr = carStr.split("#");
-	var newarr=[];
+	var result = [];
+	if(req.cookies.pid)
+	{
+			var carStr = req.cookies.pid; 
+			var arr = carStr.split("#");
+			var newarr=[];
 
-	arr.forEach(function(x){
-		var obj = { _id : Mongo.ObjectId(x) };
-		newarr.push(obj);
-	});
-
-
-
-
-	// console.log(newarr);
-	product.findWhere({ $or : newarr}, function(err, result){
-		result.forEach(function(x){
-			x.total=0;
-		});
-		arr.forEach(function(x){
-			// x= { _id : (5)}
-			result.forEach(function(y){
-				if(x == y._id)
-				{
-					y.total++;
-				}
+			arr.forEach(function(x){
+				var obj = { _id : Mongo.ObjectId(x) };
+				newarr.push(obj);
 			});
+
+
+
+
+			// console.log(newarr);
+			product.findWhere({ $or : newarr}, function(err, result){
+				result.forEach(function(x){
+					x.total=0;
+				});
+				arr.forEach(function(x){
+					// x= { _id : (5)}
+					result.forEach(function(y){
+						if(x == y._id)
+						{
+							y.total++;
+						}
+					});
+				});
+				
+				//console.log(result);
+
+
+				var pagedata = {title : "Your Cart", pagename : "cart/index", data : result};
+				res.render("layout", pagedata);
 		});
-		
-		console.log(result);
-
-
+	}
+	else
+	{
 		var pagedata = {title : "Your Cart", pagename : "cart/index", data : result};
 		res.render("layout", pagedata);
-});
+	}
 	
 });
 

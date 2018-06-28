@@ -8,6 +8,7 @@ router.use("/", require("./home"));
 
 
 router.use("/cart", require("./cart"));
+router.use("/val", require("./val"));
 
 
 
