@@ -1,6 +1,100 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script type="text/javascript">
+	/*
+	
+	<input type="file" file-model="myFile" multiple />
+	
+	var app=angular.module("myApp", []);
+	app.directive('fileModel', function ($parse) {
+	    return {
+	    restrict: 'A',
+	    link: function(scope, element, attrs) {
+	        element.bind('change', function(){
+	            scope.$apply(function(){
+	               $parse(attrs.fileModel).assign(scope, element[0].files);
+	               //console.log($parse(attrs.fileModel).assign(scope, element[0].files[0]));
+	            });
+	        });
+	    }
+	   };
+	});
+
+	app.service('fileUpload', function ($http) {
+	    this.uploadFileToUrl = function(file, uploadUrl){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	         var fd = new FormData();
+	         fd.append('file', file);
+	         console.log(fd);
+	         $http({
+	            url  : "",
+	            data : fd,
+	            method : "post"
+	         }).then()
+	         // $http.post(uploadUrl, fd, {
+	         //    headers: {'Content-Type': undefined,'Process-Data': false}
+	         // }).then(function(res){
+	         // 	console.log(res.data);
+	         // });
+	        
+	     }
+	 });
+
+
+
+
+	app.controller("myWall", function($scope, $http, fileUpload){
+
+	    
+
+		$scope.uploadFile = function(){
+			        var uploadUrl = "upload.php";
+	        fileUpload.uploadFileToUrl($scope.myFile, uploadUrl);
+
+
+
+
+
+	            // var file = $scope.myFile;
+	            // angular.forEach(file, function(new_file){
+			       //  fileUpload.uploadFileToUrl(new_file, uploadUrl);
+		        	
+		        // })
+		       
+	   };
+	$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+		// get data form first time
+		
+	});
+
+
+
+
+	*/
 	var user = angular.module("userApp", []);
+	user.directive("jDir", function(){
+		return {
+			link : function(scope, element, attrs){
+				element.bind("change", function(){
+					alert("directive calling");
+				});
+			}
+		}
+	});
+
+
 	user.controller("userCtrl", function($scope, $http){
 		$scope.user = {};
 		$scope.user1 = {};
@@ -22,14 +116,18 @@
 				data : $scope.user
 			}).then(function(res){
 				console.log(res.data);
+
 			});
 		}
 
+
 	});
+
 
 </script>
 <section class="bg0 p-t-104 p-b-116" ng-app="userApp" ng-controller="userCtrl" ng-init="getData()">
 <div class="container">
+	<input type="file" j-dir="a"/>
 	<div class="flex-w flex-tr">
 		<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
 			<h4 class="mtext-105 cl2 txt-center p-b-30">
