@@ -14,3 +14,12 @@ module.exports.findWhere=function(obj, cb){
 	});
 }
 
+
+module.exports.findWhereUpdate=function(where, obj, cb){
+	connection.init(function(err, client){
+		var db = client.db(config.dbName);
+		console.log("----------", {$set : obj});
+		db.collection('user').update(where, {$set : obj}, cb);
+	});
+}
+

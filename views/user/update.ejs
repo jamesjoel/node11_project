@@ -1,0 +1,133 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script type="text/javascript">
+	var user = angular.module("userApp", []);
+	user.controller("userCtrl", function($scope, $http){
+		$scope.user = {};
+		$scope.user1 = {};
+		$scope.getData=function(){
+			$http({
+				url : "profile/getData",
+				method : "get"
+			}).then(function(res){
+				$scope.user=res.data;
+			});
+		}
+		$scope.showEdit=function(){
+			angular.copy($scope.user, $scope.user1);
+		}
+		$scope.update=function(){
+			$http({
+				method :"post",
+				url : "profile",
+				data : $scope.user
+			}).then(function(res){
+				console.log(res.data);
+			});
+		}
+
+	});
+
+</script>
+<section class="bg0 p-t-104 p-b-116" ng-app="userApp" ng-controller="userCtrl" ng-init="getData()">
+<div class="container">
+	<div class="flex-w flex-tr">
+		<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+			<h4 class="mtext-105 cl2 txt-center p-b-30">
+				Update User
+			</h4>
+			<table class="table table-hover table-striped table-borderd">
+				<tr>
+					<td>Full Name</td>
+					<td ng-bind="user.full_name"></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td ng-bind="user.username"></td>
+				</tr>
+				<tr>
+					<td>Contact</td>
+					<td ng-bind="user.mobilenumber"></td>
+				</tr>
+				<tr>
+					<td>City</td>
+					<td ng-bind="user.city"></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td ng-bind="user.address"></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td ng-bind="user.gender"></td>
+				</tr>
+			</table>
+			<button class="btn btn-info" ng-click="showEdit()" data-target="#editModal" data-toggle="modal">Update</button>
+
+			<div class="modal fade" id="editModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+						</div>
+						<div class="modal-body">
+								<div class="bor8 m-b-20 how-pos4-parent">
+									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" ng-model="user1.full_name" name="full_name" placeholder="Your Full Name">
+									<img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+								</div>
+								<div class="bor8 m-b-20 how-pos4-parent">
+									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" ng-model="user1.username" disabled="disabled" name="username" placeholder="Your Email Address">
+									<img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+								</div>
+
+								
+								<div class="bor8 m-b-20 how-pos4-parent">
+									<textarea class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="address" placeholder="Address" ng-model="user1.address"></textarea>
+								</div>
+								<div class="bor8 m-b-20 how-pos4-parent">
+									<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="mobilenumber" ng-model="user1.mobilenumber" placeholder="Contact">
+									<img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
+								</div>
+								<div class="bor8 m-b-20 how-pos4-parent">
+									<select ng-model="user1.city" class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" name="city">
+										<option>Select</option>
+										<option value="Indore">Indore</option>
+										<option value="Indore">Ujjain</option>
+										<option value="Indore">Bhopal</option>
+										<option value="Mumbai">Mumbai</option>
+									</select>
+								</div>
+								<div class="bor8 m-b-20 how-pos4-parent">
+									M<input ng-model="user1.gender" type="radio" name="gender" value="male">
+									F<input ng-model="user1.gender" type="radio" name="gender" value="female">
+								
+								</div>
+						</div>
+						<div class="modal-footer">
+							<button ng-click="update()" type="button" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+								Submit
+							</button>
+							<button data-dismiss="modal" class="btn btn-danger">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+						
+
+						
+
+						
+					
+					
+				</div>
+
+
+				
+			</div>
+		</div>
+	</section>	
